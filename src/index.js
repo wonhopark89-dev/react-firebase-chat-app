@@ -12,6 +12,8 @@ import promiseMddieware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 // Reducer
 import Reducer from './redux/reducer/index';
+/* The following line can be included in your src/index.js or App.js file*/
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const createStoreWithMiddleware = applyMiddleware(promiseMddieware, ReduxThunk)(createStore);
 
