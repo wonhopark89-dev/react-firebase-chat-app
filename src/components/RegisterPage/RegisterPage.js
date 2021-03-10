@@ -7,19 +7,23 @@ function RegisterPage() {
   // submit 시 체크
   const { register, watch, errors, handleSubmit } = useForm();
   const [errorFromSubmit, setErrorFromSubmit] = useState('');
+  const [loading, setLoading] = useState(false);
   // 실시간으로 입력 시 체크
   //  const { register, watch, errors } = useForm({ mode: 'onChange' });
   const password = useRef();
   password.current = watch('password');
 
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     try {
+      setLoading(true);
       let createUser = await firebase.auth().createUserWithEmailAndPassword(data.email, data.password);
-      console.log(createUser);
+      // console.log(createUser);
+      setLoading(false);
     } catch (error) {
       console.log(error);
       setErrorFromSubmit(error.message);
+      setLoading(false);
       setTimeout(() => setErrorFromSubmit(''), 5000);
     }
   };
@@ -56,7 +60,7 @@ function RegisterPage() {
 
         {errorFromSubmit && <p>{errorFromSubmit}</p>}
 
-        <input type="submit" />
+        <input type="submit" disabled={loading} />
         <Link style={{ color: 'gray', textDecoration: 'none' }} to="login">
           이미 아이디가 있다면..
         </Link>
