@@ -27,7 +27,14 @@ function RegisterPage() {
         photoURL: `http://gravatar.com/avatar/${md5(createUser.user.email)}?d=identicon`,
       });
 
-      console.log(createUser);
+      // console.log(createUser);
+      // 데이터베이스에 저장하기
+      await firebase
+        .database()
+        .ref('users')
+        .child(createUser.user.uid)
+        .set({ name: createUser.user.displayName, image: createUser.user.photoURL });
+
       setLoading(false);
     } catch (error) {
       console.log(error);
