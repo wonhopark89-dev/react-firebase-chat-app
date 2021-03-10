@@ -1,23 +1,35 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import firebase from '../../firebase';
 
 function RegisterPage() {
   // submit 시 체크
-  const { register, watch, errors } = useForm();
+  const { register, watch, errors, handleSubmit } = useForm();
+  const [errorFromSubmit, setErrorFromSubmit] = useState('');
   // 실시간으로 입력 시 체크
   //  const { register, watch, errors } = useForm({ mode: 'onChange' });
   const password = useRef();
   password.current = watch('password');
 
-  // console.log(watch('email'));
+  const onSubmit = async (data) => {
+    console.log(data);
+    try {
+      let createUser = await firebase.auth().createUserWithEmailAndPassword(data.email, data.password);
+      console.log(createUser);
+    } catch (error) {
+      console.log(error);
+      setErrorFromSubmit(error.message);
+      setTimeout(() => setErrorFromSubmit(''), 5000);
+    }
+  };
 
   return (
     <div className={'auth-wrapper'}>
       <div style={{ textAlign: 'center' }}>
         <h3>Register</h3>
       </div>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <label>Email</label>
         <input name="email" type="email" ref={register({ required: true, pattern: /^\S+@\S+$/i })} />
         {errors.email?.type === 'required' && <p>This email field is required</p>}
@@ -41,6 +53,8 @@ function RegisterPage() {
         />
         {errors.password_confirm?.type === 'required' && <p>This password confirm field is required</p>}
         {errors.password_confirm?.type === 'validate' && <p>The passwords do not match</p>}
+
+        {errorFromSubmit && <p>{errorFromSubmit}</p>}
 
         <input type="submit" />
         <Link style={{ color: 'gray', textDecoration: 'none' }} to="login">
