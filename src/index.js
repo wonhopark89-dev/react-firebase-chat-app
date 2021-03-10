@@ -14,6 +14,7 @@ import ReduxThunk from 'redux-thunk';
 import Reducer from './redux/reducer/index';
 /* The following line can be included in your src/index.js or App.js file*/
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const createStoreWithMiddleware = applyMiddleware(promiseMddieware, ReduxThunk)(createStore);
 
@@ -25,7 +26,9 @@ ReactDOM.render(
         window.__REDUX_DEVTOOLS_EXTENSION && window.__REDUX_DEVTOOLS_EXTENSION()
       )}
     >
-      <App />
+      <Router>
+        <App />
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
