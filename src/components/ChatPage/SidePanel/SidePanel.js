@@ -12,9 +12,8 @@ function SidePanel() {
         padding: '2rem',
         minHeight: '100vh',
         color: 'white',
-        minWidth: '275px',
-      }}
-    >
+        minWidth: '275px'
+      }}>
       <UserPanel />
       <Favorited />
       <ChatRooms />

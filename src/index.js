@@ -6,26 +6,21 @@ import reportWebVitals from './reportWebVitals';
 /**
  * Redux
  * */
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
+import {applyMiddleware, createStore} from 'redux';
+import {Provider} from 'react-redux';
 import promiseMddieware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 // Reducer
 import Reducer from './redux/reducer/index';
 /* The following line can be included in your src/index.js or App.js file*/
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router } from 'react-router-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
 
 const createStoreWithMiddleware = applyMiddleware(promiseMddieware, ReduxThunk)(createStore);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider
-      store={createStoreWithMiddleware(
-        Reducer,
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-      )}
-    >
+    <Provider store={createStoreWithMiddleware(Reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())}>
       <Router>
         <App />
       </Router>

@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import MessageHeader from './MessageHeader';
-import Message from './Message';
 import MessageForm from './MessageForm';
 
 export class MainPanel extends Component {
   render() {
     return (
-      <div style={{ padding: '2rem 2rem 0 2rem' }}>
+      <div style={{padding: '2rem 2rem 0 2rem'}}>
         <MessageHeader />
         <div
           style={{
@@ -16,9 +15,9 @@ export class MainPanel extends Component {
             borderRadius: '4px',
             padding: '1rem',
             marginBottom: '1rem',
-            overflow: 'auto',
+            overflow: 'auto'
           }}
-        ></div>
+        />
 
         <MessageForm />
       </div>

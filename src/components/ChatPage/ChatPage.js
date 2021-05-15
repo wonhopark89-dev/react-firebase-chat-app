@@ -4,11 +4,11 @@ import MainPanel from './MainPanel/MainPanel';
 
 function ChatPage() {
   return (
-    <div style={{ display: 'flex' }}>
-      <div style={{ width: '300px' }}>
+    <div style={{display: 'flex'}}>
+      <div style={{width: '300px'}}>
         <SidePanel></SidePanel>
       </div>
-      <div style={{ width: '100%' }}>
+      <div style={{width: '100%'}}>
         <MainPanel />
       </div>
     </div>
